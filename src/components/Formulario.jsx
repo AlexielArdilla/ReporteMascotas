@@ -52,18 +52,18 @@ function Formulario({ pacientes, setPacientes, paciente, setPaciente }) {
       alta,
       sintomas
     }
-   
-    if(paciente.key){
+
+    if (paciente.key) {
       //editando
       objetoPaciente.key = paciente.key
 
-      const pacientesActualizados = pacientes.map( pacienteState =>
-          pacienteState.key === paciente.key ? objetoPaciente : pacienteState)
+      const pacientesActualizados = pacientes.map(pacienteState =>
+        pacienteState.key === paciente.key ? objetoPaciente : pacienteState)
 
       setPacientes(pacientesActualizados)
       setPaciente({})
 
-    }else{
+    } else {
       //creando
       objetoPaciente.key = generarId()
       setPacientes([...pacientes, objetoPaciente])
@@ -110,7 +110,7 @@ function Formulario({ pacientes, setPacientes, paciente, setPaciente }) {
           <textarea name="sintomas" value={sintomas} onChange={(e) => setSintomas(e.target.value)} className="border-2 w-full p-2 mt-2" id="sintomas" placeholder="Describe tus síntomas" />
         </div>
         <input type="submit" className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-800
-        cursor-pointer transition-colors" value={paciente.key ? "Editar paciente": "Agregar paciente" } />
+        cursor-pointer transition-colors" value={paciente.key ? "Editar paciente" : "Agregar paciente"} />
       </form>
     </div>
   )

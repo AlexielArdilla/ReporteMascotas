@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Header from "./components/Header"
 import Formulario from "./components/Formulario"
 import ListadoPacientes from "./components/ListadoPacientes"
@@ -8,10 +8,26 @@ function App() {
   const [pacientes, setPacientes] = useState([])
   const [paciente, setPaciente] = useState({})
 
-  const eliminarPaciente =(key)=>{
-   
-    const pacientesActualizados = pacientes.filter( paciente => paciente.key !== key)
-    
+  useEffect(() => {
+
+    //const obtenerLS = () => {
+      const pacientesLS = JSON.parse(localStorage.getItem('pacientes')) ?? [];
+      setPacientes(pacientesLS)
+    //}
+    //obtenerLS()
+  }, []);
+
+
+  useEffect(() => {
+
+    localStorage.setItem('pacientes', JSON.stringify(pacientes));
+
+  }, [pacientes])
+
+  const eliminarPaciente = (key) => {
+
+    const pacientesActualizados = pacientes.filter(paciente => paciente.key !== key)
+
     setPacientes(pacientesActualizados)
 
   }
@@ -29,7 +45,7 @@ function App() {
         <ListadoPacientes
           pacientes={pacientes}
           setPaciente={setPaciente}
-          eliminarPaciente ={eliminarPaciente}
+          eliminarPaciente={eliminarPaciente}
         />
       </div>
 
